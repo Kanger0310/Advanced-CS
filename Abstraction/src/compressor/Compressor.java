@@ -31,7 +31,30 @@ public class Compressor {
 			
 		}
 		
-		System.out.println(frq);
+//		System.out.println(frq);
+		
+		
+		PriorityQueue<Branch<Character>> pq  = new PriorityQueue<Branch<Character>>();
+		
+		for (Character c : frq.keySet()) {
+			Branch b = new Branch(c);
+			pq.add(b, frq.get(c));
+		}
+		//Check if the Branch class is correct
+	      //How to use a loop? ( make size method and run while loop until size is 1)
+	      //How to add two frequencies of the two branches (make frequency method)
+		
+		while(pq.getSize()>1)
+	      {
+			 int f1= pq.getFrequency(0);
+	         Branch first = (Branch)pq.pop();
+	         int f2= pq.getFrequency(0);
+	         Branch second = (Branch)pq.pop();
+	       
+	          Branch br = new Branch(first, second);
+	          pq.add(br, f1+f2);
+	      }
+		System.out.print(pq);
 	}
 	
 
