@@ -9,13 +9,16 @@ import java.util.*;
 	public class PriorityQueue<E>
 	{
 	   private ArrayList<Node> list = new ArrayList<Node>();
-	   
-	   public String toString()
+	   public int getSize()			//method to return the length of the arraylist
+	   {
+		   return list.size();
+	   }
+	   public String toString()			//method to printout arraylist
 	   {
 	      return list.toString();
 	   }
 	   
-	   public void add(E c, int priority)
+	   public void add(E c, int priority)	//adds node to arraylist according to its frequency
 	   {
 	      if (list.size() == 0)
 	      {
@@ -31,18 +34,36 @@ import java.util.*;
 	               return;
 	            }   
 	         }
-	         list.add(list.size()-1, new Node(c, priority) );
+	         list.add(new Node(c, priority) );
 	      }
 	   }
 	   
-	   public E pop()
+	   public E pop()					//retrieves node from priority queue
 	   {
-	      Node n = list.remove(list.size()-1);
+	      Node n = list.remove(0);
 	      return n.getinfo();
 	   }
+	   public E peek()					//retrieves character
+	   {
+		   return list.get(0).getinfo();
+	   }
+	   
+	   public int getFrequency(int a )	//returns the frequency of a character in the arraylist
+	   									//int a is the index of the character
+	   {
+		  return list.get(a).getFrequency();
+	   }
+	   public void print()
+	   {
+		   for (Node n : list)
+		   {
+			   System.out.println(n.getinfo()+ ":" + Integer.toString(n.getFrequency()));
+		   }
+	   }
+	 
 
 	
-	private class Node
+	private class Node		//node class that represents a single child in a branch
 	{
 	   private E info;
 	   private int frequency;
@@ -53,12 +74,12 @@ import java.util.*;
 	      frequency = f;
 	   }
 	   
-	   public E getinfo()
+	   public E getinfo()		//returns info(character in this case) of node
 	   {
 	      return info;
 	   }
 	   
-	   public int getFrequency()
+	   public int getFrequency()	//returns frequency of character
 	   {
 	      return frequency;
 	   }
