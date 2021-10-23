@@ -46,7 +46,7 @@ public class Compressor {
 		
 		while(pq.getSize()>1)
 	      {
-			 int f1= pq.getFrequency(0);				//get the frequency of the first node
+			 int f1= pq.getFrequency(0);			//get the frequency of the first node
 	         Branch first = (Branch)pq.pop();			//get the first node
 	         int f2= pq.getFrequency(0);				//get the frequency of the second node
 	         Branch second = (Branch)pq.pop();			//get the second node
@@ -75,7 +75,7 @@ public class Compressor {
 		 public static void getCode(HashMap<Character, String> dict, Branch<Character> node, String s)
 		 {
 		        if (node.isLeaf()) 		// if it reaches leaf, the code making for a character in the leaf is over
-		        						// thus, the code should be added into the hashmap
+		        				// thus, the code should be added into the hashmap
 		        {
 		   
 		            dict.put(node.getItem(), s);
@@ -89,8 +89,8 @@ public class Compressor {
 		 
 		 public static HashMap<Character, String> createMap(Branch<Character> cTree) 
 		 	{
-		        HashMap<Character, String> words= new HashMap<Character, String>(); // a hashmap with characters as keys and 
-		        																	// binary codes as values
+		        HashMap<Character, String> words= new HashMap<Character, String>(); // a hashmap with characters as keys and binary codes as values
+		        													
 		        getCode(words, cTree, ""); //fills in code map using getCode method 
 		        return words; //returns the code map
 		    }
@@ -127,16 +127,16 @@ public class Compressor {
 		 		{
 		        HashMap<String, Character> inv_dict = new HashMap<String, Character>();
 		        for (Map.Entry<Character, String> item : dict.entrySet())															
-		        {																//use a for loop to get the key 
+		        {										//use a for loop to get the key 
 		            inv_dict.put(item.getValue(), item.getKey());				// and values of dict<Character, String> 
-		        }																// put value of dict into key and key into value 
-		        return inv_dict;												// of new inversehashmap
+		        }										// put value of dict into key and key into value 
+		        return inv_dict;								// of new inversehashmap
 		    }
 		 
 		 // a decompressor file to decode the compressed file
 		 public static void decompress(String filename, HashMap<String, Character> dict) throws IOException{
 		        FileWriter writer = new FileWriter(filename);
-		        BufferedBitReader decompressor = new BufferedBitReader("Compressedfile"); //uses BufferedBitReader to decode the compressed 
+		        BufferedBitReader decompressor = new BufferedBitReader("Compressedfile"); //uses BufferedBitReader to decode the compressedfile
 		        																				//file created by BufferedBitWriter
 		        String code = ""; //stores code that is being read
 		        while (decompressor.hasNext()) {
@@ -148,7 +148,7 @@ public class Compressor {
 		                    code += "0";
 		            }
 		            else 
-		            {										//if inversehashmap recognizes the code, write the corresponding character
+		            {						//if inversehashmap recognizes the code, write the corresponding character
 		                writer.write(dict.get(code));		// and reset String code
 		                code = "";
 		            }
